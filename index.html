@@ -1,0 +1,3163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="author"
+      content="Zab">
+
+<meta name="description"
+      content="Kairo — Private Personal Archive, created by Zab.">
+
+<title>KAIRO // PRIVATE ARCHIVE</title>
+
+
+<!--
+=========================================================
+        KAIRO // PRIVATE ARCHIVE
+        CREATED BY ZAB
+        2026
+
+        If you found this in the source code,
+        yes, I made this too.
+=========================================================
+-->
+
+
+<style>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --black: #060606;
+    --black2: #0d0d0d;
+    --black3: #151515;
+
+    --cream: #e8dfd0;
+
+    --gold: #c7a66a;
+    --gold-dark: #765e34;
+
+    --gray: #77716a;
+
+    --red: #865454;
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    background: var(--black);
+
+    color: var(--cream);
+
+    font-family: Georgia, serif;
+
+    overflow-x: hidden;
+}
+
+img {
+
+    width: 100%;
+
+    display: block;
+}
+
+button {
+
+    font-family: monospace;
+}
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+}
+
+
+/* =====================================================
+   GRAIN EFFECT
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    pointer-events: none;
+
+    opacity: .035;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+
+/* =====================================================
+   ACCESS SCREEN
+===================================================== */
+
+#accessScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    background: #030303;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#accessScreen.hide {
+
+    opacity: 0;
+
+    visibility: hidden;
+}
+
+.accessBox {
+
+    width: min(650px, 100%);
+
+    border: 1px solid #29251e;
+
+    padding: 50px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111,
+            #060606
+        );
+
+    position: relative;
+}
+
+.accessBox h1 {
+
+    font-size:
+        clamp(70px, 15vw, 150px);
+
+    font-weight: normal;
+
+    letter-spacing: 7px;
+
+    line-height: .8;
+}
+
+.system {
+
+    font-family: monospace;
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 30px;
+}
+
+.accessText {
+
+    color: #8b867d;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    margin: 35px 0;
+}
+
+.loading {
+
+    height: 1px;
+
+    background: #222;
+
+    margin-bottom: 25px;
+}
+
+#loadingBar {
+
+    width: 0;
+
+    height: 100%;
+
+    background: var(--gold);
+
+    transition: width 2s;
+}
+
+#enterButton {
+
+    background: transparent;
+
+    border: 1px solid var(--gold-dark);
+
+    color: var(--gold);
+
+    padding: 13px 18px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#enterButton:hover {
+
+    background: var(--gold);
+
+    color: #000;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+nav {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    z-index: 1000;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 6vw;
+
+    background:
+        rgba(5,5,5,.85);
+
+    backdrop-filter: blur(15px);
+
+    border-bottom:
+        1px solid #1c1c1c;
+}
+
+.logo {
+
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+}
+
+#navLinks {
+
+    display: flex;
+
+    gap: 25px;
+}
+
+#navLinks a {
+
+    color: #777;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    transition: .2s;
+}
+
+#navLinks a:hover {
+
+    color: var(--gold);
+}
+
+#menuButton {
+
+    display: none;
+
+    background: none;
+
+    border: none;
+
+    color: var(--gold);
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 120px 7vw;
+
+    overflow: hidden;
+}
+
+.heroPhoto {
+
+    position: absolute;
+
+    right: 5vw;
+
+    top: 14vh;
+
+    width: 42vw;
+
+    height: 72vh;
+
+    overflow: hidden;
+
+    border: 1px solid #27231d;
+
+    z-index: 0;
+}
+
+.heroPhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    opacity: .65;
+
+    transition: 1s;
+
+    cursor: pointer;
+}
+
+.heroPhoto:hover img {
+
+    filter: grayscale(20%);
+
+    transform: scale(1.04);
+}
+
+.heroPhoto::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #060606 0%,
+            transparent 50%
+        );
+
+    pointer-events: none;
+}
+
+.heroContent {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 65%;
+}
+
+.classified {
+
+    display: inline-block;
+
+    color: var(--red);
+
+    border: 1px solid #5d3d3d;
+
+    padding: 8px 12px;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+
+    font-size:
+        clamp(90px, 18vw, 250px);
+
+    font-weight: normal;
+
+    line-height: .72;
+
+    letter-spacing: -6px;
+}
+
+.heroSubtitle {
+
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 7px;
+
+    margin-top: 40px;
+}
+
+.heroDetails {
+
+    display: flex;
+
+    gap: 45px;
+
+    margin-top: 60px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    color: #555;
+}
+
+.heroDetails strong {
+
+    display: block;
+
+    color: #aaa;
+
+    font-weight: normal;
+
+    margin-top: 8px;
+}
+
+.photoStamp {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    right: 20px;
+
+    z-index: 3;
+
+    font-family: monospace;
+
+    color: #888;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+.scrollText {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 7vw;
+
+    color: #555;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
+
+section {
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding: 120px 7vw;
+}
+
+.sectionHeader {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    border-bottom:
+        1px solid #29251e;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 60px;
+}
+
+.sectionHeader span {
+
+    font-family: monospace;
+
+    color: var(--gold-dark);
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.sectionHeader h2 {
+
+    font-size: 60px;
+
+    font-weight: normal;
+
+    margin-top: 8px;
+}
+
+.sectionHeader p {
+
+    color: #555;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+
+    max-width: 270px;
+
+    text-align: right;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profileLayout {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+.profilePhoto {
+
+    position: relative;
+
+    height: 650px;
+
+    overflow: hidden;
+}
+
+.profilePhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    transition: .8s;
+
+    cursor: pointer;
+}
+
+.profilePhoto:hover img {
+
+    filter: grayscale(10%);
+
+    transform: scale(1.03);
+}
+
+.profilePhoto::after {
+
+    content:
+        "SUBJECT // KR-04";
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 20px;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    color: white;
+
+    letter-spacing: 2px;
+}
+
+.profileText h3 {
+
+    font-size: 65px;
+
+    font-weight: normal;
+
+    margin-bottom: 30px;
+}
+
+.profileText p {
+
+    color: #918b82;
+
+    font-size: 19px;
+
+    line-height: 1.6;
+
+    margin-bottom: 35px;
+}
+
+.profileFacts {
+
+    border-top: 1px solid #292929;
+}
+
+.fact {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    border-bottom:
+        1px solid #1d1d1d;
+
+    font-family: monospace;
+
+    font-size: 9px;
+}
+
+.fact span:first-child {
+
+    color: #555;
+}
+
+.fact span:last-child {
+
+    color: #aaa;
+}
+
+
+/* =====================================================
+   QUOTE
+===================================================== */
+
+.quote {
+
+    margin-top: 70px;
+
+    padding: 80px 20px;
+
+    background: #0b0b0b;
+
+    text-align: center;
+
+    font-size:
+        clamp(30px, 5vw, 65px);
+
+    line-height: 1.1;
+}
+
+.quote span {
+
+    color: var(--gold);
+}
+
+
+/* =====================================================
+   PHOTO COLLAGE
+===================================================== */
+
+.collage {
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr .9fr 1fr;
+
+    grid-template-rows:
+        300px 300px;
+
+    gap: 12px;
+}
+
+.collagePhoto {
+
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background: #111;
+}
+
+.collagePhoto:nth-child(1) {
+
+    grid-row: span 2;
+}
+
+.collagePhoto:nth-child(4) {
+
+    grid-column: span 2;
+}
+
+.collagePhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    transition:
+        transform .7s,
+        filter .7s;
+}
+
+.collagePhoto:hover img {
+
+    transform: scale(1.07);
+
+    filter: grayscale(15%);
+}
+
+.collageLabel {
+
+    position: absolute;
+
+    left: 15px;
+
+    bottom: 15px;
+
+    background:
+        rgba(0,0,0,.75);
+
+    padding: 7px 10px;
+
+    font-family: monospace;
+
+    color: var(--gold);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+
+    position: relative;
+}
+
+.timeline::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 1px;
+
+    background: #332b1d;
+}
+
+.timelineItem {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    min-height: 550px;
+
+    position: relative;
+}
+
+.timelineItem:nth-child(even)
+.timelinePhoto {
+
+    order: 2;
+}
+
+.timelinePhoto {
+
+    padding: 30px;
+
+    position: relative;
+}
+
+.timelinePhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 480px;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    transition: .7s;
+
+    cursor: pointer;
+}
+
+.timelinePhoto img:hover {
+
+    filter: grayscale(15%);
+}
+
+.timelineText {
+
+    padding: 80px 60px;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+.timelineText span {
+
+    color: var(--gold);
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.timelineText h3 {
+
+    font-size: 50px;
+
+    font-weight: normal;
+
+    margin: 15px 0;
+}
+
+.timelineText p {
+
+    color: #777;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    max-width: 450px;
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.messageList {
+
+    display: grid;
+
+    gap: 15px;
+}
+
+.message {
+
+    display: grid;
+
+    grid-template-columns:
+        100px 1fr 180px;
+
+    gap: 30px;
+
+    align-items: center;
+
+    background: #0d0d0d;
+
+    padding: 18px;
+
+    border-left:
+        1px solid #765e34;
+}
+
+.messagePhoto {
+
+    width: 100px;
+
+    height: 100px;
+
+    overflow: hidden;
+}
+
+.messagePhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+}
+
+.messageInfo {
+
+    font-size: 19px;
+
+    color: #c4bcae;
+
+    line-height: 1.5;
+}
+
+.messageMeta {
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    color: #555;
+
+    line-height: 1.8;
+
+    text-align: right;
+}
+
+
+/* =====================================================
+   UNSENT FILES
+===================================================== */
+
+.unsentGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.unsent {
+
+    position: relative;
+
+    min-height: 300px;
+
+    padding: 35px;
+
+    border: 1px dashed #302b23;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+.unsentPhoto {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: .18;
+
+    transition: .5s;
+}
+
+.unsentPhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+}
+
+.unsent:hover .unsentPhoto {
+
+    opacity: .4;
+}
+
+.unsentContent {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.unsentIcon {
+
+    color: var(--gold);
+
+    font-size: 25px;
+
+    margin-bottom: 80px;
+}
+
+.unsent h3 {
+
+    font-size: 35px;
+
+    font-weight: normal;
+}
+
+.unsent small {
+
+    display: block;
+
+    color: #555;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    margin-top: 10px;
+}
+
+
+/* =====================================================
+   FINAL PHOTO
+===================================================== */
+
+.finalPhoto {
+
+    width: 100%;
+
+    height: 80vh;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.finalPhoto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(100%);
+
+    transition: 1s;
+
+    cursor: pointer;
+}
+
+.finalPhoto:hover img {
+
+    filter: grayscale(10%);
+
+    transform: scale(1.02);
+}
+
+.finalOverlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        rgba(0,0,0,.35);
+
+    pointer-events: none;
+}
+
+.finalOverlay h2 {
+
+    font-size:
+        clamp(60px, 12vw, 180px);
+
+    font-weight: normal;
+
+    letter-spacing: 10px;
+}
+
+
+/* =====================================================
+   AUTHOR REVEAL
+===================================================== */
+
+.authorReveal {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    position: relative;
+
+    padding: 120px 7vw;
+
+    border-top:
+        1px solid #29251e;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #15130f 0%,
+            #060606 55%
+        );
+}
+
+.authorTop {
+
+    position: absolute;
+
+    top: 40px;
+
+    left: 7vw;
+
+    right: 7vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: #5b554b;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.authorContent {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.authorLabel {
+
+    color: #665b49;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 35px;
+}
+
+.authorContent h2 {
+
+    font-size:
+        clamp(100px, 20vw, 280px);
+
+    font-weight: normal;
+
+    line-height: .75;
+
+    letter-spacing: -8px;
+
+    color: #e8dfd0;
+
+    transition:
+        color .5s,
+        text-shadow .5s,
+        transform .5s;
+
+    cursor: default;
+}
+
+.authorContent h2:hover {
+
+    color: #c7a66a;
+
+    text-shadow:
+        0 0 40px
+        rgba(199,166,106,.2);
+
+    transform: scale(1.02);
+}
+
+.signature {
+
+    margin-top: 45px;
+
+    color: #c7a66a;
+
+    font-family: cursive;
+
+    font-size: 32px;
+
+    transform: rotate(-7deg);
+}
+
+.authorContent p {
+
+    color: #77716a;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-top: 30px;
+}
+
+.authorContent p:nth-of-type(2) {
+
+    color: #b9b0a2;
+
+    font-size: 25px;
+}
+
+.authorStamp {
+
+    margin-top: 70px;
+
+    display: inline-block;
+
+    border:
+        1px solid #332b20;
+
+    padding: 12px 18px;
+
+    color: #575148;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    padding:
+        130px 20px 50px;
+
+    text-align: center;
+
+    font-family: monospace;
+
+    color: #444;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+footer h2 {
+
+    font-family: Georgia, serif;
+
+    color: #181818;
+
+    font-size:
+        clamp(70px, 15vw, 180px);
+
+    letter-spacing: 10px;
+
+    margin-bottom: 20px;
+}
+
+footer span {
+
+    color: #765e34;
+}
+
+
+/* =====================================================
+   IMAGE MODAL
+===================================================== */
+
+#imageModal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 6000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,.96);
+
+    padding: 30px;
+}
+
+#imageModal.open {
+
+    display: flex;
+}
+
+#modalImage {
+
+    max-width: 90%;
+
+    max-height: 90vh;
+
+    width: auto;
+
+    object-fit: contain;
+
+    border:
+        1px solid #333;
+}
+
+#closeImage {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 30px;
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 40px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width: 800px) {
+
+    #menuButton {
+
+        display: block;
+    }
+
+    #navLinks {
+
+        display: none;
+
+        position: absolute;
+
+        top: 70px;
+
+        left: 0;
+
+        right: 0;
+
+        background: #080808;
+
+        padding: 25px 7vw;
+
+        flex-direction: column;
+    }
+
+    #navLinks.open {
+
+        display: flex;
+    }
+
+    .hero {
+
+        min-height: 100vh;
+
+        padding:
+            110px 7vw 60px;
+
+        align-items: end;
+    }
+
+    .heroPhoto {
+
+        width: 100%;
+
+        height: 100%;
+
+        right: 0;
+
+        top: 0;
+
+        border: none;
+
+        opacity: .35;
+    }
+
+    .heroPhoto::after {
+
+        background:
+            linear-gradient(
+                0deg,
+                #060606 0%,
+                transparent 80%
+            );
+    }
+
+    .heroContent {
+
+        width: 100%;
+    }
+
+    .hero h1 {
+
+        font-size: 23vw;
+    }
+
+    .heroDetails {
+
+        gap: 20px;
+    }
+
+    section {
+
+        padding: 90px 6vw;
+    }
+
+    .sectionHeader {
+
+        display: block;
+    }
+
+    .sectionHeader h2 {
+
+        font-size: 48px;
+    }
+
+    .sectionHeader p {
+
+        text-align: left;
+
+        margin-top: 15px;
+    }
+
+    .profileLayout {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .profilePhoto {
+
+        height: 500px;
+    }
+
+    .profileText h3 {
+
+        font-size: 50px;
+    }
+
+    .collage {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        grid-template-rows:
+            250px
+            250px
+            250px;
+    }
+
+    .collagePhoto:nth-child(1) {
+
+        grid-row: span 2;
+    }
+
+    .collagePhoto:nth-child(4) {
+
+        grid-column: span 2;
+    }
+
+    .timeline::before {
+
+        left: 0;
+    }
+
+    .timelineItem {
+
+        display: block;
+
+        padding-left: 20px;
+    }
+
+    .timelinePhoto {
+
+        padding: 15px 0;
+    }
+
+    .timelinePhoto img {
+
+        min-height: 350px;
+    }
+
+    .timelineText {
+
+        padding:
+            35px 0 80px;
+    }
+
+    .timelineText h3 {
+
+        font-size: 42px;
+    }
+
+    .message {
+
+        grid-template-columns:
+            70px 1fr;
+    }
+
+    .messagePhoto {
+
+        width: 70px;
+
+        height: 70px;
+    }
+
+    .messageMeta {
+
+        grid-column: 2;
+
+        text-align: left;
+    }
+
+    .unsentGrid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .finalPhoto {
+
+        height: 60vh;
+    }
+
+    .authorReveal {
+
+        min-height: 90vh;
+
+        padding:
+            100px 6vw;
+    }
+
+    .authorTop {
+
+        left: 6vw;
+
+        right: 6vw;
+
+        font-size: 7px;
+    }
+
+    .authorContent h2 {
+
+        font-size: 25vw;
+
+        letter-spacing: -4px;
+    }
+
+    .authorContent p {
+
+        font-size: 16px;
+    }
+
+}
+
+
+/* =====================================================
+   AUTHOR REVEAL ANIMATION
+===================================================== */
+
+.authorReveal .authorContent {
+
+    opacity: 0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+.authorReveal.visible .authorContent {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ACCESS SCREEN
+====================================================== -->
+
+<div id="accessScreen">
+
+    <div class="accessBox">
+
+        <div class="system">
+            PRIVATE ARCHIVE // AUTHORIZATION REQUIRED
+        </div>
+
+        <h1>KAIRO</h1>
+
+        <p class="accessText">
+
+            A visual archive of photographs,
+            memories, transmissions, and moments
+            that were never meant to disappear.
+
+        </p>
+
+        <div class="loading">
+
+            <div id="loadingBar"></div>
+
+        </div>
+
+        <button id="enterButton">
+
+            ACCESS FILE →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<nav>
+
+    <div class="logo">
+        K//ARCHIVE
+    </div>
+
+    <button id="menuButton">
+        ☰
+    </button>
+
+    <div id="navLinks">
+
+        <a href="#home">HOME</a>
+
+        <a href="#profile">PROFILE</a>
+
+        <a href="#gallery">GALLERY</a>
+
+        <a href="#timeline">TIMELINE</a>
+
+        <a href="#messages">MESSAGES</a>
+
+        <a href="#unsent">UNSENT</a>
+
+        <a href="#author">AUTHOR</a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<header class="hero" id="home">
+
+    <div class="heroPhoto">
+
+        <img
+            src="images/kairo1.jpg"
+            alt="Kairo"
+            class="clickablePhoto"
+        >
+
+        <div class="photoStamp">
+            ARCHIVE IMAGE // 001
+        </div>
+
+    </div>
+
+
+    <div class="heroContent">
+
+        <div class="classified">
+
+            STATUS: CLASSIFIED
+
+        </div>
+
+        <h1>
+            KAIRO
+        </h1>
+
+        <div class="heroSubtitle">
+
+            THE PERSON BEHIND THE FILE
+
+        </div>
+
+
+        <div class="heroDetails">
+
+            <div>
+
+                FILE NO.
+
+                <strong>
+                    KR-04-XX
+                </strong>
+
+            </div>
+
+            <div>
+
+                ACCESS
+
+                <strong>
+                    RESTRICTED
+                </strong>
+
+            </div>
+
+            <div>
+
+                STATUS
+
+                <strong>
+                    ACTIVE
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="scrollText">
+
+        SCROLL TO OPEN ARCHIVE ↓
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     PROFILE
+====================================================== -->
+
+<section id="profile">
+
+    <div class="sectionHeader">
+
+        <div>
+
+            <span>
+                01 / SUBJECT
+            </span>
+
+            <h2>
+                Profile
+            </h2>
+
+        </div>
+
+        <p>
+            The person behind the photographs.
+        </p>
+
+    </div>
+
+
+    <div class="profileLayout">
+
+
+        <div class="profilePhoto">
+
+            <img
+                src="images/kairo2.jpg"
+                alt="Kairo portrait"
+                class="clickablePhoto"
+            >
+
+        </div>
+
+
+        <div class="profileText">
+
+            <h3>
+
+                The Person
+                Behind The File.
+
+            </h3>
+
+            <p>
+
+                This archive isn't meant to document
+                everything. Just the things that
+                deserve another look.
+
+            </p>
+
+            <p>
+
+                The photographs say some things
+                better than words ever could.
+
+            </p>
+
+
+            <div class="profileFacts">
+
+                <div class="fact">
+
+                    <span>
+                        DESIGNATION
+                    </span>
+
+                    <span>
+                        KAIRO
+                    </span>
+
+                </div>
+
+
+                <div class="fact">
+
+                    <span>
+                        FILE STATUS
+                    </span>
+
+                    <span>
+                        ACTIVE
+                    </span>
+
+                </div>
+
+
+                <div class="fact">
+
+                    <span>
+                        ARCHIVE TYPE
+                    </span>
+
+                    <span>
+                        PERSONAL
+                    </span>
+
+                </div>
+
+
+                <div class="fact">
+
+                    <span>
+                        ACCESS
+                    </span>
+
+                    <span>
+                        RESTRICTED
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quote">
+
+        Some people become memories.
+
+        <br>
+
+        <span>
+
+            Some memories refuse to disappear.
+
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PHOTO GALLERY
+====================================================== -->
+
+<section id="gallery">
+
+    <div class="sectionHeader">
+
+        <div>
+
+            <span>
+                02 / VISUAL RECORDS
+            </span>
+
+            <h2>
+                Photographs
+            </h2>
+
+        </div>
+
+        <p>
+            Different moments.
+            Same person.
+        </p>
+
+    </div>
+
+
+    <div class="collage">
+
+
+        <div class="collagePhoto">
+
+            <img
+                src="images/kairo3.jpg"
+                alt="Kairo photograph"
+                class="clickablePhoto"
+            >
+
+            <div class="collageLabel">
+                IMG_003 // OBSERVATION
+            </div>
+
+        </div>
+
+
+        <div class="collagePhoto">
+
+            <img
+                src="images/kairo4.jpg"
+                alt="Kairo photograph"
+                class="clickablePhoto"
+            >
+
+            <div class="collageLabel">
+                IMG_004
+            </div>
+
+        </div>
+
+
+        <div class="collagePhoto">
+
+            <img
+                src="images/kairo5.jpg"
+                alt="Kairo photograph"
+                class="clickablePhoto"
+            >
+
+            <div class="collageLabel">
+                IMG_005
+            </div>
+
+        </div>
+
+
+        <div class="collagePhoto">
+
+            <img
+                src="images/kairo6.jpg"
+                alt="Kairo photograph"
+                class="clickablePhoto"
+            >
+
+            <div class="collageLabel">
+                IMG_006 // ARCHIVED
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TIMELINE
+====================================================== -->
+
+<section id="timeline">
+
+    <div class="sectionHeader">
+
+        <div>
+
+            <span>
+                03 / CHRONOLOGY
+            </span>
+
+            <h2>
+                Four Years
+            </h2>
+
+        </div>
+
+        <p>
+            The future remains unwritten.
+        </p>
+
+    </div>
+
+
+    <div class="timeline">
+
+
+        <div class="timelineItem">
+
+            <div class="timelinePhoto">
+
+                <img
+                    src="images/kairo1.jpg"
+                    alt="Kairo year one"
+                    class="clickablePhoto"
+                >
+
+            </div>
+
+
+            <div class="timelineText">
+
+                <span>
+                    YEAR 01 // PRESENT
+                </span>
+
+                <h3>
+                    Now.
+                </h3>
+
+                <p>
+
+                    The chapter currently being written.
+                    The photographs are still being taken.
+                    The story is still happening.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="timelineItem">
+
+            <div class="timelinePhoto">
+
+                <img
+                    src="images/kairo2.jpg"
+                    alt="Kairo year two"
+                    class="clickablePhoto"
+                >
+
+            </div>
+
+
+            <div class="timelineText">
+
+                <span>
+                    YEAR 02
+                </span>
+
+                <h3>
+                    Distance.
+                </h3>
+
+                <p>
+
+                    Different places.
+                    Different routines.
+                    New experiences.
+
+                    Some photographs may become
+                    reminders of this chapter.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="timelineItem">
+
+            <div class="timelinePhoto">
+
+                <img
+                    src="images/kairo4.jpg"
+                    alt="Kairo year three"
+                    class="clickablePhoto"
+                >
+
+            </div>
+
+
+            <div class="timelineText">
+
+                <span>
+                    YEAR 03
+                </span>
+
+                <h3>
+                    Becoming.
+                </h3>
+
+                <p>
+
+                    People change.
+
+                    The archive changes with them.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="timelineItem">
+
+            <div class="timelinePhoto">
+
+                <img
+                    src="images/kairo6.jpg"
+                    alt="Kairo year four"
+                    class="clickablePhoto"
+                >
+
+            </div>
+
+
+            <div class="timelineText">
+
+                <span>
+                    YEAR 04
+                </span>
+
+                <h3>
+                    Unknown.
+                </h3>
+
+                <p>
+
+                    No predetermined ending.
+
+                    Whatever happens,
+                    this photograph belongs
+                    to the archive.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MESSAGES
+====================================================== -->
+
+<section id="messages">
+
+    <div class="sectionHeader">
+
+        <div>
+
+            <span>
+                04 / TRANSMISSIONS
+            </span>
+
+            <h2>
+                Messages
+            </h2>
+
+        </div>
+
+        <p>
+            Words attached to moments.
+        </p>
+
+    </div>
+
+
+    <div class="messageList">
+
+
+        <div class="message">
+
+            <div class="messagePhoto">
+
+                <img
+                    src="images/kairo3.jpg"
+                    alt="Kairo"
+                >
+
+            </div>
+
+
+            <div class="messageInfo">
+
+                "Drink water.
+                Eat properly.
+                Sleep on time."
+
+            </div>
+
+
+            <div class="messageMeta">
+
+                TRANSMISSION #001
+                <br>
+
+                RECEIVED
+                <br>
+
+                ARCHIVED
+
+            </div>
+
+        </div>
+
+
+
+        <div class="message">
+
+            <div class="messagePhoto">
+
+                <img
+                    src="images/kairo4.jpg"
+                    alt="Kairo"
+                >
+
+            </div>
+
+
+            <div class="messageInfo">
+
+                "Bawi nalang ako."
+
+            </div>
+
+
+            <div class="messageMeta">
+
+                TRANSMISSION #002
+                <br>
+
+                RECEIVED
+
+            </div>
+
+        </div>
+
+
+
+        <div class="message">
+
+            <div class="messagePhoto">
+
+                <img
+                    src="images/kairo5.jpg"
+                    alt="Kairo"
+                >
+
+            </div>
+
+
+            <div class="messageInfo">
+
+                "Loveyou bro."
+
+            </div>
+
+
+            <div class="messageMeta">
+
+                TRANSMISSION #003
+                <br>
+
+                ARCHIVED
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     UNSENT
+====================================================== -->
+
+<section id="unsent">
+
+    <div class="sectionHeader">
+
+        <div>
+
+            <span>
+                05 / RESTRICTED
+            </span>
+
+            <h2>
+                Unsent
+            </h2>
+
+        </div>
+
+        <p>
+            Things that remained unwritten.
+        </p>
+
+    </div>
+
+
+    <div class="unsentGrid">
+
+
+        <div
+            class="unsent"
+            data-message="
+            Maybe the point was never knowing
+            exactly where this ends.
+            Maybe the present was enough.
+            "
+        >
+
+            <div class="unsentPhoto">
+
+                <img
+                    src="images/kairo2.jpg"
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="unsentContent">
+
+                <div class="unsentIcon">
+                    ◆
+                </div>
+
+                <h3>
+                    FILE 07
+                </h3>
+
+                <small>
+                    CLICK TO DECRYPT
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="unsent"
+            data-message="
+            If you're reading this someday,
+            I hope you became someone
+            you're proud of.
+            "
+        >
+
+            <div class="unsentPhoto">
+
+                <img
+                    src="images/kairo6.jpg"
+                    alt=""
+                >
+
+            </div>
+
+
+            <div class="unsentContent">
+
+                <div class="unsentIcon">
+                    ◆
+                </div>
+
+                <h3>
+                    FILE 08
+                </h3>
+
+                <small>
+                    CLICK TO DECRYPT
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FINAL PHOTO
+====================================================== -->
+
+<section>
+
+    <div class="finalPhoto">
+
+        <img
+            src="images/kairo5.jpg"
+            alt="Kairo"
+            class="clickablePhoto"
+        >
+
+        <div class="finalOverlay">
+
+            <h2>
+                KAIRO
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AUTHOR REVEAL
+====================================================== -->
+
+<section
+    class="authorReveal"
+    id="author"
+>
+
+    <div class="authorTop">
+
+        <span>
+            06 / ARCHIVE AUTHOR
+        </span>
+
+        <span>
+            IDENTITY REVEALED
+        </span>
+
+    </div>
+
+
+    <div class="authorContent">
+
+        <div class="authorLabel">
+
+            THIS FILE WAS CREATED BY
+
+        </div>
+
+
+        <h2 id="authorName">
+            ZAB
+        </h2>
+
+
+        <div class="signature">
+
+            — Z
+
+        </div>
+
+
+        <p>
+
+            You probably thought this
+            was just a website.
+
+        </p>
+
+
+        <p>
+
+            It isn't.
+
+        </p>
+
+
+        <p>
+
+            I made this because some people
+            are worth keeping in more than
+            just a camera roll.
+
+        </p>
+
+
+        <div class="authorStamp">
+
+            CREATED WITH INTENTION // 2026
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <h2>
+        KAIRO
+    </h2>
+
+    END OF CURRENT RECORD
+
+    <br><br>
+
+    <span>
+        ARCHIVE CREATED BY ZAB
+    </span>
+
+    <br><br>
+
+    THE ARCHIVE REMAINS OPEN.
+
+</footer>
+
+
+
+<!-- =====================================================
+     IMAGE VIEWER
+====================================================== -->
+
+<div id="imageModal">
+
+    <button id="closeImage">
+        ×
+    </button>
+
+    <img
+        id="modalImage"
+        src=""
+        alt="Expanded photograph"
+    >
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ACCESS SCREEN
+===================================================== */
+
+const accessScreen =
+    document.getElementById(
+        "accessScreen"
+    );
+
+const enterButton =
+    document.getElementById(
+        "enterButton"
+    );
+
+const loadingBar =
+    document.getElementById(
+        "loadingBar"
+    );
+
+
+setTimeout(() => {
+
+    loadingBar.style.width =
+        "100%";
+
+}, 300);
+
+
+enterButton.addEventListener(
+    "click",
+    () => {
+
+        accessScreen.classList.add(
+            "hide"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const navLinks =
+    document.getElementById(
+        "navLinks"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    () => {
+
+        navLinks.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+document.querySelectorAll(
+    "#navLinks a"
+).forEach(link => {
+
+    link.addEventListener(
+        "click",
+        () => {
+
+            navLinks.classList.remove(
+                "open"
+            );
+
+        }
+    );
+
+});
+
+
+
+/* =====================================================
+   IMAGE VIEWER
+===================================================== */
+
+const modal =
+    document.getElementById(
+        "imageModal"
+    );
+
+const modalImage =
+    document.getElementById(
+        "modalImage"
+    );
+
+const closeImage =
+    document.getElementById(
+        "closeImage"
+    );
+
+
+document.querySelectorAll(
+    ".clickablePhoto"
+).forEach(image => {
+
+    image.addEventListener(
+        "click",
+        () => {
+
+            modalImage.src =
+                image.src;
+
+            modal.classList.add(
+                "open"
+            );
+
+        }
+    );
+
+});
+
+
+closeImage.addEventListener(
+    "click",
+    () => {
+
+        modal.classList.remove(
+            "open"
+        );
+
+    }
+);
+
+
+modal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === modal
+        ) {
+
+            modal.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            modal.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   TYPEWRITER
+===================================================== */
+
+const subtitle =
+    document.querySelector(
+        ".heroSubtitle"
+    );
+
+const subtitleText =
+    subtitle.textContent.trim();
+
+
+subtitle.textContent = "";
+
+let character = 0;
+
+
+function typeWriter() {
+
+    if (
+        character <
+        subtitleText.length
+    ) {
+
+        subtitle.textContent +=
+            subtitleText[character];
+
+        character++;
+
+        setTimeout(
+            typeWriter,
+            50
+        );
+
+    }
+
+}
+
+
+setTimeout(
+    typeWriter,
+    1200
+);
+
+
+
+/* =====================================================
+   SCROLL REVEAL
+===================================================== */
+
+const reveal =
+    document.querySelectorAll(
+        ".profileLayout, " +
+        ".collagePhoto, " +
+        ".timelineItem, " +
+        ".message, " +
+        ".unsent, " +
+        ".finalPhoto"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.style.opacity =
+                        "1";
+
+                    entry.target.style.transform =
+                        "translateY(0)";
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .12
+        }
+    );
+
+
+reveal.forEach(element => {
+
+    element.style.opacity =
+        "0";
+
+    element.style.transform =
+        "translateY(30px)";
+
+    element.style.transition =
+        "opacity .9s ease, " +
+        "transform .9s ease";
+
+    observer.observe(element);
+
+});
+
+
+
+/* =====================================================
+   AUTHOR REVEAL
+===================================================== */
+
+const authorReveal =
+    document.querySelector(
+        ".authorReveal"
+    );
+
+
+const authorObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    authorReveal.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .3
+        }
+    );
+
+
+authorObserver.observe(
+    authorReveal
+);
+
+
+
+/* =====================================================
+   UNSENT FILE DECRYPTION
+===================================================== */
+
+document.querySelectorAll(
+    ".unsent"
+).forEach(file => {
+
+    file.addEventListener(
+        "click",
+        () => {
+
+            const message =
+                file.dataset.message;
+
+            const small =
+                file.querySelector(
+                    "small"
+                );
+
+            const icon =
+                file.querySelector(
+                    ".unsentIcon"
+                );
+
+
+            if (
+                file.classList.contains(
+                    "decrypted"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            small.innerText =
+                message;
+
+            small.style.color =
+                "#c7a66a";
+
+            icon.innerText =
+                "✓";
+
+            file.classList.add(
+                "decrypted"
+            );
+
+        }
+    );
+
+});
+
+
+
+/* =====================================================
+   SECRET KAIRO EASTER EGG
+===================================================== */
+
+let secret = "";
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        secret +=
+            event.key.toLowerCase();
+
+
+        if (
+            secret.length > 5
+        ) {
+
+            secret =
+                secret.slice(-5);
+
+        }
+
+
+        if (
+            secret === "kairo"
+        ) {
+
+            alert(
+                "CLASSIFIED FILE FOUND.\n\n" +
+                "You weren't supposed to find this."
+            );
+
+            secret = "";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   CONSOLE SIGNATURE
+===================================================== */
+
+console.log(`
+
+========================================
+
+       KAIRO // PRIVATE ARCHIVE
+
+       CREATED BY ZAB
+       2026
+
+       If you're reading this...
+
+       yes.
+
+       I made this too.
+
+========================================
+
+`);
+
+
+</script>
+
+</body>
+
+</html>

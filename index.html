@@ -28,7 +28,6 @@
 =========================================================
 -->
 
-
 <style>
 
 /* =====================================================
@@ -36,17 +35,16 @@
 ===================================================== */
 
 :root {
+    --black: #171717;
+    --black2: #202020;
+    --black3: #292929;
 
-    --black: #060606;
-    --black2: #0d0d0d;
-    --black3: #151515;
+    --cream: #e2e2e2;
 
-    --cream: #e8dfd0;
+    --gold: #a9a9a9;
+    --gold-dark: #666666;
 
-    --gold: #c7a66a;
-    --gold-dark: #765e34;
-
-    --gray: #77716a;
+    --gray: #8a8a8a;
 
     --red: #865454;
 }
@@ -67,32 +65,23 @@ html {
 }
 
 body {
-
     background: var(--black);
-
     color: var(--cream);
-
     font-family: Georgia, serif;
-
     overflow-x: hidden;
 }
 
 img {
-
     width: 100%;
-
     display: block;
 }
 
 button {
-
     font-family: monospace;
 }
 
 a {
-
     color: inherit;
-
     text-decoration: none;
 }
 
@@ -102,17 +91,11 @@ a {
 ===================================================== */
 
 body::before {
-
     content: "";
-
     position: fixed;
-
     inset: 0;
-
     z-index: 9999;
-
     pointer-events: none;
-
     opacity: .035;
 
     background-image:
@@ -125,19 +108,14 @@ body::before {
 ===================================================== */
 
 #accessScreen {
-
     position: fixed;
-
     inset: 0;
-
     z-index: 5000;
 
-    background: #030303;
+    background: #141414;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 25px;
@@ -148,110 +126,81 @@ body::before {
 }
 
 #accessScreen.hide {
-
     opacity: 0;
-
     visibility: hidden;
 }
 
 .accessBox {
-
     width: min(650px, 100%);
 
-    border: 1px solid #29251e;
+    border: 1px solid #3a3a3a;
 
     padding: 50px;
 
     background:
         linear-gradient(
             145deg,
-            #111,
-            #060606
+            #292929,
+            #171717
         );
 
     position: relative;
 }
 
 .accessBox h1 {
-
     font-size:
         clamp(70px, 15vw, 150px);
 
     font-weight: normal;
-
     letter-spacing: 7px;
-
     line-height: .8;
 }
 
 .system {
-
     font-family: monospace;
-
-    color: #666;
-
+    color: #777;
     font-size: 10px;
-
     letter-spacing: 3px;
-
     margin-bottom: 30px;
 }
 
 .accessText {
-
-    color: #8b867d;
-
+    color: #a0a0a0;
     font-size: 18px;
-
     line-height: 1.6;
-
     margin: 35px 0;
 }
 
 .loading {
-
     height: 1px;
-
-    background: #222;
-
+    background: #383838;
     margin-bottom: 25px;
 }
 
 #loadingBar {
-
     width: 0;
-
     height: 100%;
-
     background: var(--gold);
-
     transition: width 2s;
 }
 
 #enterButton {
-
     background: transparent;
-
     border: 1px solid var(--gold-dark);
-
     color: var(--gold);
 
     padding: 13px 18px;
 
     font-size: 10px;
-
     letter-spacing: 2px;
 
     cursor: pointer;
-
     transition: .3s;
 }
 
 #enterButton:hover {
-
     background: var(--gold);
-
-    color: #000;
+    color: #171717;
 }
 
 
@@ -260,7 +209,6 @@ body::before {
 ===================================================== */
 
 nav {
-
     position: fixed;
 
     top: 0;
@@ -272,64 +220,53 @@ nav {
     z-index: 1000;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
     padding: 0 6vw;
 
     background:
-        rgba(5,5,5,.85);
+        rgba(23,23,23,.90);
 
     backdrop-filter: blur(15px);
 
     border-bottom:
-        1px solid #1c1c1c;
+        1px solid #363636;
 }
 
 .logo {
-
     color: var(--gold);
 
     font-family: monospace;
 
     font-size: 11px;
-
     letter-spacing: 4px;
 }
 
 #navLinks {
-
     display: flex;
-
     gap: 25px;
 }
 
 #navLinks a {
-
-    color: #777;
+    color: #888;
 
     font-family: monospace;
 
     font-size: 9px;
-
     letter-spacing: 1px;
 
     transition: .2s;
 }
 
 #navLinks a:hover {
-
     color: var(--gold);
 }
 
 #menuButton {
-
     display: none;
 
     background: none;
-
     border: none;
 
     color: var(--gold);
@@ -345,13 +282,11 @@ nav {
 ===================================================== */
 
 .hero {
-
     min-height: 100vh;
 
     position: relative;
 
     display: flex;
-
     align-items: center;
 
     padding: 120px 7vw;
@@ -360,34 +295,28 @@ nav {
 }
 
 .heroPhoto {
-
     position: absolute;
 
     right: 5vw;
-
     top: 14vh;
 
     width: 42vw;
-
     height: 72vh;
 
     overflow: hidden;
 
-    border: 1px solid #27231d;
+    border: 1px solid #3a3a3a;
 
     z-index: 0;
 }
 
 .heroPhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
 
     filter: grayscale(100%);
-
     opacity: .65;
 
     transition: 1s;
@@ -396,24 +325,20 @@ nav {
 }
 
 .heroPhoto:hover img {
-
     filter: grayscale(20%);
-
     transform: scale(1.04);
 }
 
 .heroPhoto::after {
-
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
         linear-gradient(
             90deg,
-            #060606 0%,
+            #171717 0%,
             transparent 50%
         );
 
@@ -421,7 +346,6 @@ nav {
 }
 
 .heroContent {
-
     position: relative;
 
     z-index: 2;
@@ -430,7 +354,6 @@ nav {
 }
 
 .classified {
-
     display: inline-block;
 
     color: var(--red);
@@ -442,39 +365,33 @@ nav {
     font-family: monospace;
 
     font-size: 9px;
-
     letter-spacing: 2px;
 
     margin-bottom: 35px;
 }
 
 .hero h1 {
-
     font-size:
         clamp(90px, 18vw, 250px);
 
     font-weight: normal;
 
     line-height: .72;
-
     letter-spacing: -6px;
 }
 
 .heroSubtitle {
-
     color: var(--gold);
 
     font-family: monospace;
 
     font-size: 10px;
-
     letter-spacing: 7px;
 
     margin-top: 40px;
 }
 
 .heroDetails {
-
     display: flex;
 
     gap: 45px;
@@ -485,11 +402,10 @@ nav {
 
     font-size: 8px;
 
-    color: #555;
+    color: #666;
 }
 
 .heroDetails strong {
-
     display: block;
 
     color: #aaa;
@@ -500,38 +416,32 @@ nav {
 }
 
 .photoStamp {
-
     position: absolute;
 
     bottom: 20px;
-
     right: 20px;
 
     z-index: 3;
 
     font-family: monospace;
 
-    color: #888;
+    color: #999;
 
     font-size: 8px;
-
     letter-spacing: 1px;
 }
 
 .scrollText {
-
     position: absolute;
 
     bottom: 25px;
-
     left: 7vw;
 
-    color: #555;
+    color: #666;
 
     font-family: monospace;
 
     font-size: 8px;
-
     letter-spacing: 2px;
 }
 
@@ -541,7 +451,6 @@ nav {
 ===================================================== */
 
 section {
-
     max-width: 1400px;
 
     margin: auto;
@@ -550,15 +459,13 @@ section {
 }
 
 .sectionHeader {
-
     display: flex;
 
     justify-content: space-between;
-
     align-items: end;
 
     border-bottom:
-        1px solid #29251e;
+        1px solid #3a3a3a;
 
     padding-bottom: 20px;
 
@@ -566,18 +473,15 @@ section {
 }
 
 .sectionHeader span {
-
     font-family: monospace;
 
     color: var(--gold-dark);
 
     font-size: 9px;
-
     letter-spacing: 2px;
 }
 
 .sectionHeader h2 {
-
     font-size: 60px;
 
     font-weight: normal;
@@ -586,8 +490,7 @@ section {
 }
 
 .sectionHeader p {
-
-    color: #555;
+    color: #666;
 
     font-family: monospace;
 
@@ -606,7 +509,6 @@ section {
 ===================================================== */
 
 .profileLayout {
-
     display: grid;
 
     grid-template-columns:
@@ -618,7 +520,6 @@ section {
 }
 
 .profilePhoto {
-
     position: relative;
 
     height: 650px;
@@ -627,9 +528,7 @@ section {
 }
 
 .profilePhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -642,21 +541,18 @@ section {
 }
 
 .profilePhoto:hover img {
-
     filter: grayscale(10%);
 
     transform: scale(1.03);
 }
 
 .profilePhoto::after {
-
     content:
         "SUBJECT // KR-04";
 
     position: absolute;
 
     bottom: 20px;
-
     left: 20px;
 
     font-family: monospace;
@@ -669,7 +565,6 @@ section {
 }
 
 .profileText h3 {
-
     font-size: 65px;
 
     font-weight: normal;
@@ -678,8 +573,7 @@ section {
 }
 
 .profileText p {
-
-    color: #918b82;
+    color: #999;
 
     font-size: 19px;
 
@@ -689,12 +583,10 @@ section {
 }
 
 .profileFacts {
-
-    border-top: 1px solid #292929;
+    border-top: 1px solid #3a3a3a;
 }
 
 .fact {
-
     display: flex;
 
     justify-content: space-between;
@@ -702,7 +594,7 @@ section {
     padding: 15px 0;
 
     border-bottom:
-        1px solid #1d1d1d;
+        1px solid #303030;
 
     font-family: monospace;
 
@@ -710,12 +602,10 @@ section {
 }
 
 .fact span:first-child {
-
-    color: #555;
+    color: #666;
 }
 
 .fact span:last-child {
-
     color: #aaa;
 }
 
@@ -725,12 +615,11 @@ section {
 ===================================================== */
 
 .quote {
-
     margin-top: 70px;
 
     padding: 80px 20px;
 
-    background: #0b0b0b;
+    background: #202020;
 
     text-align: center;
 
@@ -741,7 +630,6 @@ section {
 }
 
 .quote span {
-
     color: var(--gold);
 }
 
@@ -751,7 +639,6 @@ section {
 ===================================================== */
 
 .collage {
-
     display: grid;
 
     grid-template-columns:
@@ -764,30 +651,25 @@ section {
 }
 
 .collagePhoto {
-
     position: relative;
 
     overflow: hidden;
 
     cursor: pointer;
 
-    background: #111;
+    background: #292929;
 }
 
 .collagePhoto:nth-child(1) {
-
     grid-row: span 2;
 }
 
 .collagePhoto:nth-child(4) {
-
     grid-column: span 2;
 }
 
 .collagePhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -800,18 +682,15 @@ section {
 }
 
 .collagePhoto:hover img {
-
     transform: scale(1.07);
 
     filter: grayscale(15%);
 }
 
 .collageLabel {
-
     position: absolute;
 
     left: 15px;
-
     bottom: 15px;
 
     background:
@@ -832,12 +711,10 @@ section {
 ===================================================== */
 
 .timeline {
-
     position: relative;
 }
 
 .timeline::before {
-
     content: "";
 
     position: absolute;
@@ -845,16 +722,14 @@ section {
     left: 50%;
 
     top: 0;
-
     bottom: 0;
 
     width: 1px;
 
-    background: #332b1d;
+    background: #444;
 }
 
 .timelineItem {
-
     display: grid;
 
     grid-template-columns:
@@ -867,21 +742,17 @@ section {
 
 .timelineItem:nth-child(even)
 .timelinePhoto {
-
     order: 2;
 }
 
 .timelinePhoto {
-
     padding: 30px;
 
     position: relative;
 }
 
 .timelinePhoto img {
-
     width: 100%;
-
     height: 100%;
 
     min-height: 480px;
@@ -896,12 +767,10 @@ section {
 }
 
 .timelinePhoto img:hover {
-
     filter: grayscale(15%);
 }
 
 .timelineText {
-
     padding: 80px 60px;
 
     display: flex;
@@ -912,7 +781,6 @@ section {
 }
 
 .timelineText span {
-
     color: var(--gold);
 
     font-family: monospace;
@@ -923,7 +791,6 @@ section {
 }
 
 .timelineText h3 {
-
     font-size: 50px;
 
     font-weight: normal;
@@ -932,8 +799,7 @@ section {
 }
 
 .timelineText p {
-
-    color: #777;
+    color: #888;
 
     font-size: 18px;
 
@@ -948,14 +814,12 @@ section {
 ===================================================== */
 
 .messageList {
-
     display: grid;
 
     gap: 15px;
 }
 
 .message {
-
     display: grid;
 
     grid-template-columns:
@@ -965,27 +829,23 @@ section {
 
     align-items: center;
 
-    background: #0d0d0d;
+    background: #202020;
 
     padding: 18px;
 
     border-left:
-        1px solid #765e34;
+        1px solid #777;
 }
 
 .messagePhoto {
-
     width: 100px;
-
     height: 100px;
 
     overflow: hidden;
 }
 
 .messagePhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -994,21 +854,19 @@ section {
 }
 
 .messageInfo {
-
     font-size: 19px;
 
-    color: #c4bcae;
+    color: #cfcfcf;
 
     line-height: 1.5;
 }
 
 .messageMeta {
-
     font-family: monospace;
 
     font-size: 8px;
 
-    color: #555;
+    color: #666;
 
     line-height: 1.8;
 
@@ -1021,7 +879,6 @@ section {
 ===================================================== */
 
 .unsentGrid {
-
     display: grid;
 
     grid-template-columns:
@@ -1031,14 +888,13 @@ section {
 }
 
 .unsent {
-
     position: relative;
 
     min-height: 300px;
 
     padding: 35px;
 
-    border: 1px dashed #302b23;
+    border: 1px dashed #484848;
 
     overflow: hidden;
 
@@ -1046,7 +902,6 @@ section {
 }
 
 .unsentPhoto {
-
     position: absolute;
 
     inset: 0;
@@ -1057,9 +912,7 @@ section {
 }
 
 .unsentPhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -1068,19 +921,16 @@ section {
 }
 
 .unsent:hover .unsentPhoto {
-
     opacity: .4;
 }
 
 .unsentContent {
-
     position: relative;
 
     z-index: 2;
 }
 
 .unsentIcon {
-
     color: var(--gold);
 
     font-size: 25px;
@@ -1089,17 +939,15 @@ section {
 }
 
 .unsent h3 {
-
     font-size: 35px;
 
     font-weight: normal;
 }
 
 .unsent small {
-
     display: block;
 
-    color: #555;
+    color: #666;
 
     font-family: monospace;
 
@@ -1114,7 +962,6 @@ section {
 ===================================================== */
 
 .finalPhoto {
-
     width: 100%;
 
     height: 80vh;
@@ -1125,9 +972,7 @@ section {
 }
 
 .finalPhoto img {
-
     width: 100%;
-
     height: 100%;
 
     object-fit: cover;
@@ -1140,14 +985,12 @@ section {
 }
 
 .finalPhoto:hover img {
-
     filter: grayscale(10%);
 
     transform: scale(1.02);
 }
 
 .finalOverlay {
-
     position: absolute;
 
     inset: 0;
@@ -1155,7 +998,6 @@ section {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
@@ -1167,7 +1009,6 @@ section {
 }
 
 .finalOverlay h2 {
-
     font-size:
         clamp(60px, 12vw, 180px);
 
@@ -1182,7 +1023,6 @@ section {
 ===================================================== */
 
 .authorReveal {
-
     min-height: 100vh;
 
     display: flex;
@@ -1196,31 +1036,29 @@ section {
     padding: 120px 7vw;
 
     border-top:
-        1px solid #29251e;
+        1px solid #3a3a3a;
 
     background:
         radial-gradient(
             circle at center,
-            #15130f 0%,
-            #060606 55%
+            #303030 0%,
+            #171717 55%
         );
 }
 
 .authorTop {
-
     position: absolute;
 
     top: 40px;
 
     left: 7vw;
-
     right: 7vw;
 
     display: flex;
 
     justify-content: space-between;
 
-    color: #5b554b;
+    color: #777;
 
     font-family: monospace;
 
@@ -1230,7 +1068,6 @@ section {
 }
 
 .authorContent {
-
     max-width: 900px;
 
     margin: auto;
@@ -1239,8 +1076,7 @@ section {
 }
 
 .authorLabel {
-
-    color: #665b49;
+    color: #888;
 
     font-family: monospace;
 
@@ -1252,7 +1088,6 @@ section {
 }
 
 .authorContent h2 {
-
     font-size:
         clamp(100px, 20vw, 280px);
 
@@ -1262,7 +1097,7 @@ section {
 
     letter-spacing: -8px;
 
-    color: #e8dfd0;
+    color: #e2e2e2;
 
     transition:
         color .5s,
@@ -1273,21 +1108,19 @@ section {
 }
 
 .authorContent h2:hover {
-
-    color: #c7a66a;
+    color: #d0d0d0;
 
     text-shadow:
         0 0 40px
-        rgba(199,166,106,.2);
+        rgba(255,255,255,.12);
 
     transform: scale(1.02);
 }
 
 .signature {
-
     margin-top: 45px;
 
-    color: #c7a66a;
+    color: #aaa;
 
     font-family: cursive;
 
@@ -1297,8 +1130,7 @@ section {
 }
 
 .authorContent p {
-
-    color: #77716a;
+    color: #888;
 
     font-size: 18px;
 
@@ -1308,24 +1140,22 @@ section {
 }
 
 .authorContent p:nth-of-type(2) {
-
-    color: #b9b0a2;
+    color: #c0c0c0;
 
     font-size: 25px;
 }
 
 .authorStamp {
-
     margin-top: 70px;
 
     display: inline-block;
 
     border:
-        1px solid #332b20;
+        1px solid #444;
 
     padding: 12px 18px;
 
-    color: #575148;
+    color: #777;
 
     font-family: monospace;
 
@@ -1340,7 +1170,6 @@ section {
 ===================================================== */
 
 footer {
-
     padding:
         130px 20px 50px;
 
@@ -1348,7 +1177,7 @@ footer {
 
     font-family: monospace;
 
-    color: #444;
+    color: #555;
 
     font-size: 8px;
 
@@ -1356,10 +1185,9 @@ footer {
 }
 
 footer h2 {
-
     font-family: Georgia, serif;
 
-    color: #181818;
+    color: #292929;
 
     font-size:
         clamp(70px, 15vw, 180px);
@@ -1370,8 +1198,7 @@ footer h2 {
 }
 
 footer span {
-
-    color: #765e34;
+    color: #777;
 }
 
 
@@ -1380,7 +1207,6 @@ footer span {
 ===================================================== */
 
 #imageModal {
-
     position: fixed;
 
     inset: 0;
@@ -1390,7 +1216,6 @@ footer span {
     display: none;
 
     align-items: center;
-
     justify-content: center;
 
     background:
@@ -1400,14 +1225,11 @@ footer span {
 }
 
 #imageModal.open {
-
     display: flex;
 }
 
 #modalImage {
-
     max-width: 90%;
-
     max-height: 90vh;
 
     width: auto;
@@ -1415,19 +1237,16 @@ footer span {
     object-fit: contain;
 
     border:
-        1px solid #333;
+        1px solid #444;
 }
 
 #closeImage {
-
     position: absolute;
 
     top: 20px;
-
     right: 30px;
 
     background: none;
-
     border: none;
 
     color: white;
@@ -1445,12 +1264,10 @@ footer span {
 @media(max-width: 800px) {
 
     #menuButton {
-
         display: block;
     }
 
     #navLinks {
-
         display: none;
 
         position: absolute;
@@ -1458,10 +1275,9 @@ footer span {
         top: 70px;
 
         left: 0;
-
         right: 0;
 
-        background: #080808;
+        background: #202020;
 
         padding: 25px 7vw;
 
@@ -1469,12 +1285,10 @@ footer span {
     }
 
     #navLinks.open {
-
         display: flex;
     }
 
     .hero {
-
         min-height: 100vh;
 
         padding:
@@ -1484,13 +1298,11 @@ footer span {
     }
 
     .heroPhoto {
-
         width: 100%;
 
         height: 100%;
 
         right: 0;
-
         top: 0;
 
         border: none;
@@ -1499,71 +1311,59 @@ footer span {
     }
 
     .heroPhoto::after {
-
         background:
             linear-gradient(
                 0deg,
-                #060606 0%,
+                #171717 0%,
                 transparent 80%
             );
     }
 
     .heroContent {
-
         width: 100%;
     }
 
     .hero h1 {
-
         font-size: 23vw;
     }
 
     .heroDetails {
-
         gap: 20px;
     }
 
     section {
-
         padding: 90px 6vw;
     }
 
     .sectionHeader {
-
         display: block;
     }
 
     .sectionHeader h2 {
-
         font-size: 48px;
     }
 
     .sectionHeader p {
-
         text-align: left;
 
         margin-top: 15px;
     }
 
     .profileLayout {
-
         grid-template-columns: 1fr;
 
         gap: 35px;
     }
 
     .profilePhoto {
-
         height: 500px;
     }
 
     .profileText h3 {
-
         font-size: 50px;
     }
 
     .collage {
-
         grid-template-columns:
             1fr 1fr;
 
@@ -1574,80 +1374,65 @@ footer span {
     }
 
     .collagePhoto:nth-child(1) {
-
         grid-row: span 2;
     }
 
     .collagePhoto:nth-child(4) {
-
         grid-column: span 2;
     }
 
     .timeline::before {
-
         left: 0;
     }
 
     .timelineItem {
-
         display: block;
 
         padding-left: 20px;
     }
 
     .timelinePhoto {
-
         padding: 15px 0;
     }
 
     .timelinePhoto img {
-
         min-height: 350px;
     }
 
     .timelineText {
-
         padding:
             35px 0 80px;
     }
 
     .timelineText h3 {
-
         font-size: 42px;
     }
 
     .message {
-
         grid-template-columns:
             70px 1fr;
     }
 
     .messagePhoto {
-
         width: 70px;
-
         height: 70px;
     }
 
     .messageMeta {
-
         grid-column: 2;
 
         text-align: left;
     }
 
     .unsentGrid {
-
         grid-template-columns: 1fr;
     }
 
     .finalPhoto {
-
         height: 60vh;
     }
 
     .authorReveal {
-
         min-height: 90vh;
 
         padding:
@@ -1655,26 +1440,21 @@ footer span {
     }
 
     .authorTop {
-
         left: 6vw;
-
         right: 6vw;
 
         font-size: 7px;
     }
 
     .authorContent h2 {
-
         font-size: 25vw;
 
         letter-spacing: -4px;
     }
 
     .authorContent p {
-
         font-size: 16px;
     }
-
 }
 
 
@@ -1683,7 +1463,6 @@ footer span {
 ===================================================== */
 
 .authorReveal .authorContent {
-
     opacity: 0;
 
     transform:
@@ -1695,7 +1474,6 @@ footer span {
 }
 
 .authorReveal.visible .authorContent {
-
     opacity: 1;
 
     transform:
@@ -1927,7 +1705,7 @@ footer span {
 
                 This archive isn't meant to document
                 everything. Just the things that
-                deserve another look.
+                deserve another look.(eme).
 
             </p>
 
@@ -1998,20 +1776,17 @@ footer span {
 
     </div>
 
+<div class="quote">
 
-    <div class="quote">
+    Every case leaves evidence.
 
-        Some people become memories.
+    <br>
 
-        <br>
+    <span>
+        Not every piece of evidence tells the truth.
+    </span>
 
-        <span>
-
-            Some memories refuse to disappear.
-
-        </span>
-
-    </div>
+</div>
 
 </section>
 
@@ -2381,7 +2156,7 @@ footer span {
 
             <div class="messageInfo">
 
-                "Bawi nalang ako."
+                "Some days are going to suck. Keep going anyway."
 
             </div>
 
@@ -2413,7 +2188,7 @@ footer span {
 
             <div class="messageInfo">
 
-                "Loveyou bro."
+                "I hope you collect more memories than regrets."
 
             </div>
 
